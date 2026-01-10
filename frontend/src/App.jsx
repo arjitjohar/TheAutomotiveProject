@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import './App.css'
+
 
 function App() {
   const [cars, setCars] = useState([])
@@ -97,18 +97,18 @@ function App() {
     setCurrentPage(1);
   }, [filteredCars.length, rowsPerPage]);
 
-  if (loading) return <div className="loading">Loading dashboard...</div>
+  if (loading) return <div className="flex justify-center items-center h-screen text-2xl text-gray-500">Loading dashboard...</div>
 
 
   return (
-    <div className="App">
-      <h1>Car Dashboard</h1>
+    <div className="min-h-screen w-full max-w-7xl mx-auto p-5 flex flex-col gap-6 bg-gradient-to-br from-slate-50 to-blue-50">
+      <h1 className="text-5xl font-bold text-center text-gray-800 mb-8 drop-shadow-lg">Car Dashboard</h1>
       
-      <div className="filters">
-        <h2>Filters</h2>
+      <div className="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 border border-gray-200">
+        <h2 className="col-span-full text-2xl font-bold text-gray-700 mb-4">Filters</h2>
         <div>
-          <label>Fuel: </label>
-          <select value={filters.fuel} onChange={(e) => updateFilter('fuel', e.target.value)}>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Fuel:</label>
+          <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" value={filters.fuel} onChange={(e) => updateFilter('fuel', e.target.value)}>
             <option value="">All</option>
             {getUniqueOptions('fuel').map(opt => (
               <option key={opt} value={opt}>{opt}</option>
@@ -116,8 +116,8 @@ function App() {
           </select>
         </div>
         <div>
-          <label>Transmission: </label>
-          <select value={filters.transmission} onChange={(e) => updateFilter('transmission', e.target.value)}>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Transmission:</label>
+          <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" value={filters.transmission} onChange={(e) => updateFilter('transmission', e.target.value)}>
             <option value="">All</option>
             {getUniqueOptions('transmission').map(opt => (
               <option key={opt} value={opt}>{opt}</option>
@@ -125,8 +125,8 @@ function App() {
           </select>
         </div>
         <div>
-          <label>Seller Type: </label>
-          <select value={filters.seller_type} onChange={(e) => updateFilter('seller_type', e.target.value)}>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Seller Type:</label>
+          <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" value={filters.seller_type} onChange={(e) => updateFilter('seller_type', e.target.value)}>
             <option value="">All</option>
             {getUniqueOptions('seller_type').map(opt => (
               <option key={opt} value={opt}>{opt}</option>
@@ -134,20 +134,20 @@ function App() {
           </select>
         </div>
         <div>
-          <label>Min Price: </label>
-          <input type="number" value={filters.minPrice} onChange={(e) => updateFilter('minPrice', e.target.value)} />
+          <label className="block text-sm font-medium text-gray-700 mb-2">Min Price:</label>
+          <input className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" type="number" value={filters.minPrice} onChange={(e) => updateFilter('minPrice', e.target.value)} />
         </div>
         <div>
-          <label>Max Price: </label>
-          <input type="number" value={filters.maxPrice} onChange={(e) => updateFilter('maxPrice', e.target.value)} />
+          <label className="block text-sm font-medium text-gray-700 mb-2">Max Price:</label>
+          <input className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" type="number" value={filters.maxPrice} onChange={(e) => updateFilter('maxPrice', e.target.value)} />
         </div>
       </div>
 
-      <div className="stats">
-        <p>Showing {indexOfFirstRow + 1}-{Math.min(indexOfLastRow, filteredCars.length)} of {filteredCars.length} cars</p>
-        <div className="rows-selector">
-          <label>Rows per page: </label>
-          <select value={rowsPerPage} onChange={handleRowsChange}>
+      <div className="flex flex-col items-center gap-4 text-center text-lg font-semibold text-blue-600 mb-5">
+        <p className="text-xl">Showing {indexOfFirstRow + 1}-{Math.min(indexOfLastRow, filteredCars.length)} of {filteredCars.length} cars</p>
+        <div className="flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700">Rows per page:</label>
+          <select className="p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" value={rowsPerPage} onChange={handleRowsChange}>
             {rowsOptions.map(opt => (
               <option key={opt} value={opt}>{opt}</option>
             ))}
@@ -156,23 +156,23 @@ function App() {
       </div>
 
       {ownerStats.length > 0 && (
-        <div className="chart-container">
-          <h3>Avg KM Driven by Owner</h3>
+        <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-200">
+          <h3 className="text-2xl font-bold text-center text-gray-800 mb-5">Avg KM Driven by Owner</h3>
           <div className="owner-bars">
             {ownerStats.map((stat) => {
               const maxKm = Math.max(...ownerStats.map(s => s.avg_km || 0));
               const barWidth = (stat.avg_km / maxKm) * 100;
               return (
-                <div key={stat.owner} className="bar-item">
-                  <span className="owner-label">{stat.owner}</span>
-                  <div className="bar-background">
+                <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
+                  <span className="min-w-[120px] font-medium text-gray-700 text-sm">{stat.owner}</span>
+                  <div className="flex-1 h-8 bg-gray-200 rounded-full overflow-hidden">
                     <div 
-                      className="bar-fill" 
+                      className="h-full bg-gradient-to-r from-blue-500 to-blue-700 rounded-full transition-all duration-500" 
                       style={{ width: `${barWidth}%` }}
                       title={`${stat.avg_km.toLocaleString()} km`}
                     />
                   </div>
-                  <span className="km-value">{stat.avg_km.toLocaleString()}</span>
+                  <span className="min-w-[80px] text-right font-semibold text-blue-600 text-sm">{stat.avg_km.toLocaleString()}</span>
                 </div>
               );
             })}
@@ -182,38 +182,53 @@ function App() {
 
 
 
-      <div className="table-container">
-        <table>
+      <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+        <div className="overflow-x-auto">
+          <table className="w-full divide-y divide-gray-200">
           <thead>
-            <tr>
-              <th>Name</th>
-              <th>Year</th>
-              <th>Price (Rs)</th>
-              <th>KM Driven</th>
-              <th>Fuel</th>
-              <th>Seller</th>
-              <th>Transmission</th>
-              <th>Owner</th>
+            <tr className="bg-blue-600 text-white">
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider sticky top-0">Name</th>
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider sticky top-0">Year</th>
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider sticky top-0">Price (Rs)</th>
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider sticky top-0">KM Driven</th>
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider sticky top-0">Fuel</th>
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider sticky top-0">Seller</th>
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider sticky top-0">Transmission</th>
+              <th className="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider sticky top-0">Owner</th>
             </tr>
           </thead>
           <tbody>
             {currentCars.map((car, index) => (
-              <tr key={index}>
-                <td>{car.name}</td>
-                <td>{car.year}</td>
-                <td>{car.selling_price.toLocaleString()}</td>
-                <td>{car.km_driven.toLocaleString()}</td>
-                <td>{car.fuel}</td>
-                <td>{car.seller_type}</td>
-                <td>{car.transmission}</td>
-                <td>{car.owner}</td>
+              <tr key={index} className="hover:bg-gray-50 transition-colors cursor-pointer">
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{car.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{car.year}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">₹{car.selling_price.toLocaleString()}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{car.km_driven.toLocaleString()} km</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    car.fuel === 'Petrol' ? 'bg-green-100 text-green-800' :
+                    car.fuel === 'Diesel' ? 'bg-blue-100 text-blue-800' :
+                    'bg-gray-100 text-gray-800'
+                  }`}>
+                    {car.fuel}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{car.seller_type}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    car.transmission === 'Manual' ? 'bg-yellow-100 text-yellow-800' : 'bg-purple-100 text-purple-800'
+                  }`}>
+                    {car.transmission}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{car.owner}</td>
               </tr>
             ))}
           </tbody>
         </table>
 
         {filteredCars.length > 0 && (
-          <div className="pagination">
+          <div className="flex justify-center items-center gap-4 p-6 pt-0 border-t border-gray-200 bg-gray-50">
             <button onClick={prevPage} disabled={currentPage === 1}>
               Previous
             </button>
