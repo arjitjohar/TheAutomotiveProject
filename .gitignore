@@ -1,0 +1,21 @@
+# Node modules
+**/node_modules/
+*.log
+
+# Data
+data/
+**/*.parquet
+**/*.csv~
+
+# AWS installer
+aws/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/settings.json
+.idea/
+.DS_Store
