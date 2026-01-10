@@ -97,11 +97,11 @@ function App() {
     setCurrentPage(1);
   }, [filteredCars.length, rowsPerPage]);
 
-  if (loading) return <div className="flex justify-center items-center h-screen text-2xl text-gray-500">Loading dashboard...</div>
+  if (loading) return <div className="flex justify-center items-center h-screen w-screen text-2xl text-gray-500">Loading dashboard...</div>
 
 
   return (
-    <div className="min-h-screen w-full max-w-7xl mx-auto p-5 flex flex-col gap-6 bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen w-screen p-5 flex flex-col gap-6 bg-gradient-to-br from-slate-50 to-blue-50">
       <h1 className="text-5xl font-bold text-center text-gray-800 mb-8 drop-shadow-lg">Car Dashboard</h1>
       
       <div className="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 border border-gray-200">
@@ -226,7 +226,7 @@ function App() {
             ))}
           </tbody>
         </table>
-
+        </div>
         {filteredCars.length > 0 && (
           <div className="flex justify-center items-center gap-4 p-6 pt-0 border-t border-gray-200 bg-gray-50">
             <button onClick={prevPage} disabled={currentPage === 1}>
