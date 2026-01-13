@@ -101,7 +101,7 @@ function App() {
 
 
   return (
-    <div className="min-h-screen p-5 flex flex-col gap-6 bg-gradient-to-br from-slate-50 to-blue-50 px-50">
+    <div className="min-h-screen w-screen flex flex-col  bg-gradient-to-br from-slate-50 to-blue-50 ">
       <h1 className="text-5xl font-bold text-center text-gray-800 mb-8 drop-shadow-lg">Car Dashboard</h1>
       
       <div className="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 border border-gray-200">
