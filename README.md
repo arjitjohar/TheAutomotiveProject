@@ -1,5 +1,7 @@
 # The Automotive Project 🚗📈
 
+![Automotive Project Dashboard](screenshots/Screenshot 2026-01-13 140829.png)
+
 Bluebook car market analytics pipeline using AWS serverless + fullstack web app.
 
 ## 🏗️ Architecture
