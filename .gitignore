@@ -19,3 +19,6 @@ aws/
 .vscode/settings.json
 .idea/
 .DS_Store
+
+# Prompts / Chat data
+prompts/
